@@ -1,0 +1,159 @@
+/* Gallery CSS - Images plus grandes avec lightbox */
+
+/* Reset des styles Jimdo gallery - Masonry-like layout */
+.j-gallery .cc-m-gallery-container {
+  display: grid !important;
+  grid-template-columns: repeat(3, 1fr);
+  grid-auto-rows: 10px;
+  gap: 12px;
+  padding: 10px 0;
+}
+
+.j-gallery .cc-m-gallery-cool-item {
+  float: none !important;
+  width: auto !important;
+  height: auto !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  grid-row-end: span 20; /* Default height */
+  overflow: hidden;
+  border-radius: 6px;
+  background: #1a1a1a;
+}
+
+.j-gallery .cc-m-gallery-cool-item > div {
+  width: 100% !important;
+  height: 100% !important;
+}
+
+.j-gallery .cc-m-gallery-cool-item a {
+  display: block;
+  width: 100%;
+  height: 100%;
+  text-decoration: none;
+  border: none !important;
+}
+
+.j-gallery .cc-m-gallery-cool-item img {
+  width: 100% !important;
+  height: 100% !important;
+  object-fit: cover;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: transform 0.3s ease, opacity 0.3s ease;
+}
+
+.j-gallery .cc-m-gallery-cool-item:hover img {
+  transform: scale(1.05);
+  opacity: 0.9;
+}
+
+/* Different sizes based on image aspect ratio */
+.j-gallery .cc-m-gallery-cool-item:nth-child(4n+1) {
+  grid-row-end: span 25;
+}
+
+.j-gallery .cc-m-gallery-cool-item:nth-child(4n+2) {
+  grid-row-end: span 18;
+}
+
+.j-gallery .cc-m-gallery-cool-item:nth-child(4n+3) {
+  grid-row-end: span 22;
+}
+
+.j-gallery .cc-m-gallery-cool-item:nth-child(4n) {
+  grid-row-end: span 20;
+}
+
+/* Make some items span 2 columns for variety */
+.j-gallery .cc-m-gallery-cool-item:nth-child(5n+1) {
+  grid-column: span 1;
+}
+
+/* Slider gallery - images plus grandes */
+.cc-m-gallery-slider .cc-m-gallery-slider-images-wrapper {
+  max-height: 600px !important;
+}
+
+.cc-m-gallery-slider img {
+  max-height: 600px !important;
+  object-fit: contain;
+}
+
+/* Lightbox CSS */
+.lightbox-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.95);
+  z-index: 10000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.3s ease, visibility 0.3s ease;
+}
+
+.lightbox-overlay.active {
+  opacity: 1;
+  visibility: visible;
+}
+
+.lightbox-overlay img {
+  max-width: 90vw;
+  max-height: 90vh;
+  object-fit: contain;
+  border-radius: 4px;
+  box-shadow: 0 0 50px rgba(0,0,0,0.5);
+}
+
+.lightbox-close {
+  position: absolute;
+  top: 20px;
+  right: 30px;
+  font-size: 50px;
+  color: white;
+  cursor: pointer;
+  z-index: 10001;
+  line-height: 1;
+  transition: transform 0.2s ease;
+  text-shadow: 0 2px 10px rgba(0,0,0,0.5);
+}
+
+.lightbox-close:hover {
+  transform: scale(1.2);
+}
+
+/* Responsive - Tablet */
+@media (max-width: 900px) {
+  .j-gallery .cc-m-gallery-container {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 10px;
+  }
+}
+
+/* Responsive - Mobile */
+@media (max-width: 600px) {
+  .j-gallery .cc-m-gallery-container {
+    grid-template-columns: repeat(2, 1fr);
+    grid-auto-rows: 8px;
+    gap: 8px;
+  }
+
+  .j-gallery .cc-m-gallery-cool-item {
+    grid-row-end: span 15 !important;
+  }
+
+  .j-gallery .cc-m-gallery-cool-item:nth-child(3n+1) {
+    grid-row-end: span 18 !important;
+  }
+
+  .lightbox-close {
+    top: 10px;
+    right: 15px;
+    font-size: 35px;
+  }
+}

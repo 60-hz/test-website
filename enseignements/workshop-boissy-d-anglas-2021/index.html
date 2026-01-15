@@ -115,6 +115,11 @@
       type="text/css"
       id="jimdo_layout_css"
     />
+    <link
+      href="../../css/gallery.css"
+      rel="stylesheet"
+      type="text/css"
+    >
     <script>
       /* <![CDATA[ */ /*!  loadCss [c]2014 @scottjehl, Filament Group, Inc.  Licensed MIT */ window.loadCSS =
         window.loadCss = function (e, n, t) {
@@ -3569,6 +3574,88 @@
       //<![CDATA[
       // addAutomatedTracking("creator.website", track_anon);
       //]]>
+    </script>
+  
+    <!-- Lightbox for gallery images -->
+    <div class="lightbox-overlay" id="lightbox">
+      <span class="lightbox-close" onclick="closeLightbox()">&times;</span>
+      <img id="lightbox-img" src="" alt="">
+    </div>
+        <script>
+      // Lightbox functionality
+      (function() {
+        function initLightbox() {
+          // Find all gallery images - multiple selectors for compatibility
+          var selectors = [
+            '.j-gallery a[data-href] img',
+            '.j-gallery a[rel*="lightbox"] img',
+            '.cc-m-gallery-cool-item img',
+            '.cc-m-gallery-slider img'
+          ];
+
+          selectors.forEach(function(selector) {
+            document.querySelectorAll(selector).forEach(function(img) {
+              img.style.cursor = 'pointer';
+              img.addEventListener('click', function(e) {
+                e.preventDefault();
+                e.stopPropagation();
+
+                // Get high-res image URL
+                var link = this.closest('a');
+                var imgSrc = (link && link.getAttribute('data-href')) || this.src;
+
+                // Use image as-is
+
+                openLightbox(imgSrc);
+              });
+            });
+          });
+
+          // Close on overlay click
+          var overlay = document.getElementById('lightbox');
+          if (overlay) {
+            overlay.addEventListener('click', function(e) {
+              if (e.target === this || e.target.classList.contains('lightbox-close')) {
+                closeLightbox();
+              }
+            });
+          }
+
+          // Close on Escape key
+          document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape') closeLightbox();
+          });
+        }
+
+        function openLightbox(src) {
+          var overlay = document.getElementById('lightbox');
+          var img = document.getElementById('lightbox-img');
+          if (overlay && img) {
+            img.src = src;
+            overlay.classList.add('active');
+            document.body.style.overflow = 'hidden';
+          }
+        }
+
+        function closeLightbox() {
+          var overlay = document.getElementById('lightbox');
+          if (overlay) {
+            overlay.classList.remove('active');
+            document.body.style.overflow = '';
+          }
+        }
+
+        // Make functions global
+        window.openLightbox = openLightbox;
+        window.closeLightbox = closeLightbox;
+
+        // Init on DOM ready
+        if (document.readyState === 'loading') {
+          document.addEventListener('DOMContentLoaded', initLightbox);
+        } else {
+          initLightbox();
+        }
+      })();
     </script>
   </body>
 </html>
