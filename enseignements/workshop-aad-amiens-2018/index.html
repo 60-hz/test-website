@@ -158,8 +158,7 @@
     <script>
       // <![CDATA[
       onloadCSS(
-        loadCss(
-          "/css/web.css"
+        loadCss("../../css/web.css"
         ),
         function () {
           this.id = "jimdo_web_css";
@@ -1397,7 +1396,7 @@
 
     <script type="text/javascript">
       //<![CDATA[
-      if (window.CookieControl.isCookieAllowed("ga")) {
+      if (false) { // Disabled CookieControl
         (function () {
           var ga = document.createElement("script");
           ga.type = "text/javascript";
@@ -1427,7 +1426,7 @@
     </script>
     <script type="text/javascript">
       //<![CDATA[
-      addAutomatedTracking("creator.website", track_anon);
+      // addAutomatedTracking("creator.website", track_anon);
       //]]>
     </script>
   </body>
